@@ -47,7 +47,7 @@ def get_args():
 
 A Good Organisation is the one which
 recognizes all of its contributors. But it can
-be hectic at time creating a MARKDOWN file containing
+be hectic at times creating a MARKDOWN file containing
 all the collaborators.
 
 This is where the script comes to use.
@@ -55,9 +55,10 @@ This is where the script comes to use.
 It automatically generates a simple yet cool
 Contributors.MD for your Repository.
 The documentation / How to use can be found
-here :
+here : https://github.com/gabru-md/contributors.md#readme
 
 """
+
 args = get_args()
 
 uid = args.id

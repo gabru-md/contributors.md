@@ -10,8 +10,8 @@ A Good Organisation is the one which recognizes all of its contributors.<br><br>
 be hectic at times creating a MARKDOWN file containing
 all the collaborators<br>and their contributions to the project.<br><br>
 This is where the script comes to use.<br><br>
-It automatically generates a simple yet cool
-<strong>Contributors.MD</strong> for your Repository
+It automatically generates a <strong>simple yet cool</strong>
+<strong>[Contributors.MD](https://github.com/gabru-md/contributors.md/blob/master/Contributors.md)</strong> for your Repository
 
 ### [Skip to Usage](https://github.com/gabru-md/contributors.md#usage)
 ### Modules used are :
@@ -40,4 +40,10 @@ It automatically generates a simple yet cool
     python ./contrib.py -id GITHUB_USERNAME -pwd GITHUB_PASSWORD -repo REPO_NAME
     
 #### The Repository Name must be in format user/repo_name or org_name/repo_name 
-    
+
+[Here](https://github.com/nsITians/nsITians.github.io/blob/master/Contributors.md)
+is an example of the Contributors.md that can be created.
+
+Changes can be made to the .rpy files to add subsequent data to the file.<br>
+
+Contributors.md is generated inside the 'rpy' folder

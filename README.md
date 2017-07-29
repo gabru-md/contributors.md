@@ -34,7 +34,7 @@ It automatically generates a <strong>simple yet cool</strong>
   For parsing the commandline arguments for Github Authentication and name of Repository.
 
 ## Usage
-    pip insatll PyGithub
+    pip install PyGithub
     git clone https://github.com/gabru-md/contributors.md
     cd contributors.md
     python ./contrib.py -id GITHUB_USERNAME -pwd GITHUB_PASSWORD -repo REPO_NAME

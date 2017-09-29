@@ -25,13 +25,13 @@ It automatically generates a <strong>simple yet cool</strong>
   <br>Link To it [Here](https://github.com/PyGithub/PyGithub)
 
 ### OS Module
-  OS Module is used to iterate through the folders in your directory. And to find the templates to render (.rpy files).
+  OS Module is used to iterate through the folders in your directory and to find the templates to render (.rpy files).
  
 ### SYS Module
   SYS Module performs the sys.exit(Error_Code) function.
 
 ### ArgParse Module
-  For parsing the commandline arguments for Github Authentication and name of Repository.
+  ArgParse Module is used for parsing the commandline arguments for Github Authentication and name of Repository.
 
 ## Usage
     pip install PyGithub

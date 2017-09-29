@@ -39,7 +39,6 @@ def get_args():
 
     parser.add_argument('-repo', type=str,help='Name of the Repository\nIf repository in id then type only the REPO_NAME\nIf repository in Organisation type: ORG_NAME/REPO_NAME',required=True)
     args = parser.parse_args()
-    #print type(args.repo)
     return args
 
 
@@ -78,7 +77,6 @@ try:
             names.append(g.get_user(str(member.login)).name)
 except Exception as e:
     sys.exit(e)
-#print members
 cwd = os.getcwd()
 
 list_dir = os.listdir(cwd)
@@ -86,15 +84,8 @@ list_dir = os.listdir(cwd)
 folder = 'rpy'
 
 if folder in list_dir:
-    #print 'Changing Folder'
     os.chdir(os.getcwd() + "/" + folder)
-    #print 'Done'
-
 cwd = os.getcwd()
-
-#list_dir = os.listdir(cwd)
-
-
 
 with open('head.rpy', 'r') as content_file:
     head = content_file.read()
@@ -108,7 +99,6 @@ repo = '<%= repo %>'
 name = '<%= name %>'
 replace = {repo:repository,uid:members,name:names}
 collaborators = replace[uid]
-#print collaborators
 with open('Contributors.md', 'w') as outfile:
     outfile.write(head)
     for i in range(len(replace[uid])):

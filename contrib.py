@@ -39,7 +39,6 @@ def get_args():
 
     parser.add_argument('-repo', type=str,help='Name of the Repository\nIf repository in id then type only the REPO_NAME\nIf repository in Organisation type: ORG_NAME/REPO_NAME',required=True)
     args = parser.parse_args()
-    #print type(args.repo)
     return args
 
 
@@ -86,14 +85,9 @@ list_dir = os.listdir(cwd)
 folder = 'rpy'
 
 if folder in list_dir:
-    #print 'Changing Folder'
     os.chdir(os.getcwd() + "/" + folder)
-    #print 'Done'
 
 cwd = os.getcwd()
-
-#list_dir = os.listdir(cwd)
-
 
 
 with open('head.rpy', 'r') as content_file:

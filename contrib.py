@@ -78,7 +78,6 @@ try:
             names.append(g.get_user(str(member.login)).name)
 except Exception as e:
     sys.exit(e)
-#print members
 cwd = os.getcwd()
 
 list_dir = os.listdir(cwd)
@@ -86,13 +85,10 @@ list_dir = os.listdir(cwd)
 folder = 'rpy'
 
 if folder in list_dir:
-    #print 'Changing Folder'
     os.chdir(os.getcwd() + "/" + folder)
-    #print 'Done'
 
 cwd = os.getcwd()
 
-#list_dir = os.listdir(cwd)
 
 
 
@@ -108,7 +104,6 @@ repo = '<%= repo %>'
 name = '<%= name %>'
 replace = {repo:repository,uid:members,name:names}
 collaborators = replace[uid]
-#print collaborators
 with open('Contributors.md', 'w') as outfile:
     outfile.write(head)
     for i in range(len(replace[uid])):

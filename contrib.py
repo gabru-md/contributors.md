@@ -9,6 +9,9 @@ import sys
 import argparse
 from github import Github
 
+TEMPLATE_FOLDER = 'rpy'
+DEFAULT_NAME = 'None'
+
 """
 
 Generate Contributors.MD for your repository.
@@ -31,16 +34,20 @@ The Link to which is : https://github.com/PyGithub
 """
 
 def get_args():
-    parser = argparse.ArgumentParser(description='To create collaborators for the repository\nYou must have push access to the repository.\nWithout push access this will not work!')
-
+    parser = argparse.ArgumentParser(description=(
+        'To create collaborators for the repository you must have push access '
+        'to the repository. Without push access this will not work!'
+    ))
     parser.add_argument('-id', type=str,
-                        help='ID or Username for Github',required=True)
-    parser.add_argument('-pwd',type=str,help='Password for Github',required=True)
-
-    parser.add_argument('-repo', type=str,help='Name of the Repository\nIf repository in id then type only the REPO_NAME\nIf repository in Organisation type: ORG_NAME/REPO_NAME',required=True)
+                        help='ID or Username for Github', required=True)
+    parser.add_argument('-pwd', type=str, help='Password for Github',
+                        required=True)
+    parser.add_argument('-repo', type=str, help=(
+        'Name of the Repository. If repository in id then type only the '
+        'REPO_NAME. If repository in Organisation type: ORG_NAME/REPO_NAME.'
+    ), required=True)
     args = parser.parse_args()
     return args
-
 
 """
 
@@ -59,60 +66,39 @@ here : https://github.com/gabru-md/contributors.md#readme
 """
 
 args = get_args()
+g = Github(args.id, args.pwd)
+repo = g.get_repo(args.repo)
+members = []
+names = []
+for member in repo.get_collaborators():
+    login = str(member.login)
+    members.append(login)
+    names.append(g.get_user(login).name)
 
-uid = args.id
-pwd = args.pwd
-repository = args.repo
-
-
-g = Github(uid,pwd)
-repo = g.get_repo(repository)
-try:
-    collaborators = repo.get_collaborators()
-
-    members = []
-    names = []
-    for member in collaborators:
-            members.append(str(member.login))
-            names.append(g.get_user(str(member.login)).name)
-except Exception as e:
-    sys.exit(e)
-cwd = os.getcwd()
-
-list_dir = os.listdir(cwd)
-
-folder = 'rpy'
-
-if folder in list_dir:
-    os.chdir(os.getcwd() + "/" + folder)
-cwd = os.getcwd()
+if TEMPLATE_FOLDER in os.listdir(os.getcwd()):
+    os.chdir(os.path.join(os.getcwd(), TEMPLATE_FOLDER))
 
 with open('head.rpy', 'r') as content_file:
     head = content_file.read()
 
-
 with open('foot.rpy', 'r') as content_file:
     foot = content_file.read()
 
-uid = '<%= id %>'
-repo = '<%= repo %>'
-name = '<%= name %>'
-replace = {repo:repository,uid:members,name:names}
-collaborators = replace[uid]
 with open('Contributors.md', 'w') as outfile:
     outfile.write(head)
-    for i in range(len(replace[uid])):
-        with open('myfile.rpy') as infile:
+    with open('myfile.rpy') as infile:
+        for member, name in zip(members, names):
+            replace = {
+                '<%= repo %>': args.repo,
+                '<%= id %>': member,
+                '<%= name %>': name if name is not None else DEFAULT_NAME,
+            }
             for line in infile:
                 for src, target in replace.iteritems():
-                    if src == repo:
-                        line = line.replace(src, target)
-                    elif src == uid:
-                        line = line.replace(src,collaborators[i])
-                    elif src == name:
-                        line = line.replace(src,names[i])
+                    line = line.replace(src, target)
                 outfile.write(line)
+            infile.seek(0)
     outfile.write(foot)
 
-
-sys.exit("Contributors.MD created!")
+sys.stdout.write("Contributors.MD created!\n")
+sys.exit()
